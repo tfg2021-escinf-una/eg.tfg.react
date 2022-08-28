@@ -1,15 +1,32 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
+import { Provider } from 'react-redux';
+import { createGlobalStyle } from 'styled-components';
+import { TfgThemeProvider } from './components/themes/TfgThemeProvider';
+import { store } from './redux';
 import reportWebVitals from './reportWebVitals';
+import { ApplicationRouter } from './router';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
+const GlobalStyles = createGlobalStyle`
+  body {
+    margin: 0px;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+`
+
 root.render(
   <React.StrictMode>
-    <App />
+    <TfgThemeProvider mode={"dark"}>
+      <GlobalStyles />
+      <Provider store={store}>
+        <ApplicationRouter/>
+      </Provider>
+    </TfgThemeProvider>
   </React.StrictMode>
 );
 

@@ -1,14 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { sessionReducer } from "./slices/session.slice";
-
+import { api } from "../api/api";
+import { sessionReducer as sReducer } from "./slices/session.slice";
 export const store = configureStore({
+  reducer: {
+    [api.reducerPath]: api.reducer,
+    sessionReducer: sReducer
+  },
   middleware: (getDefaultMiddleware) => 
     getDefaultMiddleware({
       serializableCheck: false
-    }),
-  reducer: {
-    sessionReducer: sessionReducer
-  },
+    }).concat(api.middleware),
 })
 
 export type RootState = ReturnType<typeof store.getState>
