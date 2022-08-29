@@ -61,7 +61,7 @@ export const createCustomTheme = (mode : PaletteMode) =>
     },
     typography: {
       htmlFontSize: 18,
-      fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+      fontFamily: '"-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif"'
     },
   }
 );

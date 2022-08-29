@@ -1,1 +1,2 @@
-export * from './services/identityService';
+export * from './api';
+export * from './services';

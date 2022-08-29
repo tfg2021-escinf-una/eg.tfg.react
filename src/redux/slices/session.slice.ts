@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "..";
 import { endpoints } from "../../api";
 import { IUserIdentity } from "../../interfaces";
-import { identityBuilder } from "../utils";
+import { checkAuthToken, identityBuilder } from "../utils";
 
 export interface ISessionState {
   isAuthenticated : boolean,
@@ -28,7 +28,7 @@ export const login = createAsyncThunk('session/login',
       emailAddress,
       password
     }))
-
+    const { data } = loginRequest
     if(loginRequest.isError){
       const error : any = loginRequest.error
       return {
@@ -39,16 +39,17 @@ export const login = createAsyncThunk('session/login',
         isRequestingLogin: false
       }
     }
+
     return {
       ...sessionReducer,
       isAuthenticated: true,
       isRequestingLogin: false,
-      identity : identityBuilder(loginRequest.data!)
+      identity : identityBuilder(data!.data)
     }
   }
 )
 
-export const refresh = createAsyncThunk('session/logout',
+export const refresh = createAsyncThunk('session/refresh',
   async ({ jwt, refresh } : any, { getState, dispatch }) => {
     const { sessionReducer } = getState() as RootState
     const refreshRequest = await dispatch(endpoints.refresh.initiate({
@@ -57,10 +58,39 @@ export const refresh = createAsyncThunk('session/logout',
     }))
 
     if(refreshRequest.isSuccess){
+      const { data } = refreshRequest
       return {
         ...sessionReducer,
         isAuthenticated: true,
-        identity: identityBuilder(refreshRequest.data)
+        identity: identityBuilder(data!.data)
+      }
+    }
+    return {
+      ...sessionReducer, 
+      isAuthenticated: false,
+      identity: undefined
+    }
+  } 
+)
+
+export const checkAuthentication = createAsyncThunk('session/checkAuthentication',
+  async (_ , { getState, dispatch }) => {
+    const { sessionReducer } = getState() as RootState
+    const { identity, isAuthenticated } = sessionReducer
+    if(identity && identity.tokens && isAuthenticated){
+      if(!checkAuthToken(identity.tokens)){
+        const refreshRequest = await dispatch(endpoints.refresh.initiate({
+          jwtToken: identity.tokens.jwtToken,
+          refreshToken: identity.tokens.refreshToken
+        }))
+        if(refreshRequest.isSuccess){
+          const { data } = refreshRequest
+          return {
+            ...sessionReducer,
+            isAuthenticated: true,
+            identity: identityBuilder(data!.data)
+          }
+        }
       }
     }
     return {
@@ -83,7 +113,9 @@ const sessionSlice = (state: ISessionState = initialState) => (
         ...state, failure: action.payload
       }),
       logout: (state) => ({
-        ...state, identity: undefined
+        ...state, 
+        identity: undefined,
+        isAuthenticated: false
       })
     },
     extraReducers: (builder) => {

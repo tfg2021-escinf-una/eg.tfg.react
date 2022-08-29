@@ -1,4 +1,4 @@
-import { IToken, IUser } from "../../interfaces";
+import { IApiResponse, IToken, IUser } from "../../interfaces";
 import { api } from "../api";
 
 export type CredentialRequest = {
@@ -16,26 +16,27 @@ export type RefreshTokenRequest = {
   refreshToken: string,
 }
 
+const identityPrefix = '/api/User' || '/identity'
 const identityService = api.injectEndpoints({
   endpoints: (builder) => ({
-    login: builder.query<IToken, CredentialRequest>({
+    login: builder.query<IApiResponse<IToken>, CredentialRequest>({
       query: (credentials) => ({
-        url: '/identity/login',
+        url: `${identityPrefix}/login`,
         method: 'POST',
         body: credentials,
         validateStatus: (response) => response.status === 200,
       }),    
     }),
-    register: builder.query<RegisterUser, RegisterUser>({
+    register: builder.query<IApiResponse<RegisterUser>, RegisterUser>({
       query: (user) => ({
-        url: '/identity/register',
+        url: `${identityPrefix}/register`,
         method: 'POST',
         body: user
       })
     }),
-    refresh: builder.query<IToken, RefreshTokenRequest>({
+    refresh: builder.query<IApiResponse<IToken>, RefreshTokenRequest>({
       query: (tokens) => ({
-        url: '/identity/refresh',
+        url: `${identityPrefix}/refresh`,
         method: 'POST',
         body: tokens
       })

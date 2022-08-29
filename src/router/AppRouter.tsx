@@ -11,9 +11,9 @@ export const ApplicationRouter = () => {
     <BrowserRouter>
       <AppWrapper>
         <Routes>
-          { routeConfig.map((route, index) => (
+          { 
+            routeConfig.map((route, index) =>
               <Route key={index} {...route} /> )
-            )
           }
         </Routes>
       </AppWrapper>

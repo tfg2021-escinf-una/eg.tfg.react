@@ -1,3 +1,3 @@
 export const config = {
-  gatewayBaseUrl : process.env['gatewayBaseUrl']
+  gatewayBaseUrl : process.env['REACT_APP_GATEWAY_BASEURL']
 }
