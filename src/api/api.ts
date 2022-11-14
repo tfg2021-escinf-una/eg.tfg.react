@@ -3,14 +3,14 @@ import { config } from '../config'
 import { RootState } from '../redux'
 
 // Getting our baseUrl gateway link.
-const { gatewayBaseUrl } = config
+const { APIBaseUrl } = config
 
 // Create our baseQuery instance
 const baseQuery = fetchBaseQuery({
-  baseUrl: gatewayBaseUrl,
+  baseUrl: APIBaseUrl,
   prepareHeaders: (headers, { getState }) => {
     // By default, if we have a token in the store, let's use that for authenticated requests
-    const { identity } = (getState() as RootState).sessionReducer
+    const { sessionReducer: { identity } } = (getState() as RootState)
     if (identity && identity.tokens) {
       headers.set('Authentication', `Bearer ${identity.tokens}`)
     }
@@ -51,5 +51,4 @@ export const api = createApi({
    * If you want all endpoints defined in the same file, they could be included here instead
    */
   endpoints: () => ({}),
-
 })

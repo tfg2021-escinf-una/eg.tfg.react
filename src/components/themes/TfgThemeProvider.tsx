@@ -10,7 +10,8 @@ export interface IThemeProps {
 
 export const TfgThemeProvider = ({
   mode = 'dark',
-  children } : IThemeProps) => {
+  children 
+} : IThemeProps) => {
   const theme = createCustomTheme(mode);
   return(
     <ThemeProvider theme={theme}>

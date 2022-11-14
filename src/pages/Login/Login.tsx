@@ -4,7 +4,6 @@ import SnackBar from '@mui/material/Snackbar';
 import { forwardRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
-import imgSrc from '../../assets/logo.png';
 import { AppDispatch, RootState } from "../../redux";
 import { ISessionState, login } from "../../redux/slices/session.slice";
 import { StyledCardActions, StyledCardContent, StyledDiv, StyledLogoWrapper } from "./Login.styles";
@@ -61,7 +60,7 @@ export const Login = () => {
         <Card sx={{ minWidth: 400 }} className="card">
           <StyledCardContent>
             <StyledLogoWrapper>
-              <img src={imgSrc} alt="tfg-logo" />
+              <img src={"/logo.png"} alt="tfg-logo" />
             </StyledLogoWrapper>
             <Box component="div"
                  sx={{ marginBottom: '20px',  width: '100%'}}>

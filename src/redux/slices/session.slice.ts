@@ -22,61 +22,59 @@ const initialState : ISessionState = {
 
 export const login = createAsyncThunk('session/login', 
   async ({ emailAddress, password } : any, { getState, dispatch }) => {
-    dispatch(request(true))
     const { sessionReducer } = getState() as RootState
-    const loginRequest = await dispatch(endpoints.login.initiate({
-      emailAddress,
-      password
-    }))
-    const { data } = loginRequest
-    if(loginRequest.isError){
-      const error : any = loginRequest.error
+    try {
+      dispatch(request(true))
+      const login = await dispatch(endpoints.login.initiate({
+        emailAddress,
+        password
+      })).unwrap()   
+      return {
+        ...sessionReducer,
+        isAuthenticated: true,
+        isRequestingLogin: false,
+        identity : identityBuilder(login!.data)
+      }
+    } catch (err: any) {
       return {
         ...sessionReducer,
         isAuthenticated: false,
-        isNotFound: error.originalStatus === 404,
-        isInvalidPassword: error.originalStatus === 400,
+        isNotFound: err.originalStatus === 404,
+        isInvalidPassword: err.originalStatus === 400,
         isRequestingLogin: false
       }
-    }
-
-    return {
-      ...sessionReducer,
-      isAuthenticated: true,
-      isRequestingLogin: false,
-      identity : identityBuilder(data!.data)
-    }
+    } finally {
+      dispatch(request(false))
+    } 
   }
 )
 
 export const refresh = createAsyncThunk('session/refresh',
   async ({ jwt, refresh } : any, { getState, dispatch }) => {
     const { sessionReducer } = getState() as RootState
-    const refreshRequest = await dispatch(endpoints.refresh.initiate({
-      jwtToken: jwt,
-      refreshToken: refresh
-    }))
-
-    if(refreshRequest.isSuccess){
-      const { data } = refreshRequest
+    try{
+      const request = await dispatch(endpoints.refresh.initiate({
+        jwtToken: jwt,
+        refreshToken: refresh
+      })).unwrap()
       return {
         ...sessionReducer,
         isAuthenticated: true,
-        identity: identityBuilder(data!.data)
+        identity: identityBuilder(request!.data)
       }
-    }
-    return {
-      ...sessionReducer, 
-      isAuthenticated: false,
-      identity: undefined
+    } catch(err) {
+      return {
+        ...sessionReducer, 
+        isAuthenticated: false,
+        identity: undefined
+      }
     }
   } 
 )
 
 export const checkAuthentication = createAsyncThunk('session/checkAuthentication',
   async (_ , { getState, dispatch }) => {
-    const { sessionReducer } = getState() as RootState
-    const { identity, isAuthenticated } = sessionReducer
+    const { sessionReducer: { identity, isAuthenticated } } = getState() as RootState
     if(identity && identity.tokens && isAuthenticated){
       if(!checkAuthToken(identity.tokens)){
         const refreshRequest = await dispatch(endpoints.refresh.initiate({

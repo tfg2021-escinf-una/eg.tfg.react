@@ -3,10 +3,10 @@ const resolvePath = (relativePath) =>
   path.resolve(__dirname, '..', relativePath)
 
 module.exports = {
-  webpack: (config, env) => {
+  webpack: (config, _env) => {
     return config
   },
-  paths: (config, env) => {
+  paths: (config, _env) => {
     config.dotenv = resolvePath('.env')
     config.appPath = resolvePath('.')
     config.appBuild = resolvePath('dist/build')

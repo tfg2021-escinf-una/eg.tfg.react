@@ -20,7 +20,7 @@ export const StyledCarouselCardContainer = styled.div`
   overflow: hidden;
 `
 export const StyledCarouselContainer = styled.div`
-  height: 60%;
+  height: 45%;
   width: 100%;
 `
 export const StyledImgContainer = styled.div`

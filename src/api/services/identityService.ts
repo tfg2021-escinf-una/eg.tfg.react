@@ -1,5 +1,6 @@
 import { IApiResponse, IToken, IUser } from "../../interfaces";
 import { api } from "../api";
+import { config } from "../../config";
 
 export type CredentialRequest = {
   emailAddress : string,
@@ -16,7 +17,7 @@ export type RefreshTokenRequest = {
   refreshToken: string,
 }
 
-const identityPrefix = '/api/User' || '/identity'
+const identityPrefix = config.gatewayIdpPrefix
 const identityService = api.injectEndpoints({
   endpoints: (builder) => ({
     login: builder.query<IApiResponse<IToken>, CredentialRequest>({

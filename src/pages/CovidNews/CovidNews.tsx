@@ -16,7 +16,7 @@ const CovidNews = () => {
           newsData && 
             <Carousel height={'500px'}>
               {
-              newsData.map((news, i) => (       
+              newsData.news.map((news, i) => (       
                   <StyledCarouselCardContainer key={i}>
                     <StyledImgContainer>
                       <StyledImg src={news.urlToImage} 
