@@ -15,17 +15,13 @@ export const withAuthentication =
     const dispatch : AppDispatch = useDispatch();
     
     useEffect(() => {
+      console.log('executed')
       dispatch(checkAuthentication())
-    }, [
-      dispatch
-    ])
+    }, [dispatch])
 
     useInterval(() => {
       if(identity && identity.tokens){
-        const { tokens: {
-          jwtToken,
-          refreshToken
-        }} = identity
+        const { tokens: { jwtToken, refreshToken }} = identity
         dispatch(refresh({
           jwt: jwtToken,
           refresh: refreshToken

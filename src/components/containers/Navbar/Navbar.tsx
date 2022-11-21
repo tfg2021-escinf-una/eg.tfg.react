@@ -1,7 +1,8 @@
 import { AccountCircle } from '@mui/icons-material';
-import { Button, IconButton, Menu, MenuItem, Toolbar, Typography } from "@mui/material";
+import { Button, IconButton, Menu, MenuItem, Toolbar } from "@mui/material";
 import { useState } from 'react';
-import { StyledNavbar } from './Navbar.styles';
+import { Typography } from '../../utils';
+import { StyledContainer, StyledNavbar } from './Navbar.styles';
 
 export interface INavbarProps {
   isAuthenticated : boolean,
@@ -30,10 +31,15 @@ export const Navbar = ({
   return(
     <StyledNavbar>
       <Toolbar>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          { title }
-        </Typography>
-        <div>
+        <StyledContainer flexGrow>
+          <Typography as="h5"
+                      size="lg"
+                      weight="normal"
+                      fontColor={{ color: 'primary', type: 'contrastText' }}>
+            { title }
+          </Typography>
+        </StyledContainer>
+        <StyledContainer>
         {
           isAuthenticated && (
             <>
@@ -72,10 +78,12 @@ export const Navbar = ({
             <Button color="inherit"
                     variant="outlined"
                     size="medium"
-                    onClick={() =>handleOnClickLogin?.()}>Login</Button>
+                    onClick={() =>handleOnClickLogin?.()}>
+              <Typography size="md" as="h5">Login</Typography>
+            </Button>
           </>)
         }
-        </div>
+        </StyledContainer>
       </Toolbar>
     </StyledNavbar>
   );

@@ -7,13 +7,13 @@ export const StyledHeader = styled.header`
 `
 export const StyledContent = styled.div`
   display: flex;
-  background-color: ${({ theme }) => theme.palette['background'].default};
+  background-color: ${({ theme }) => theme.palette.find({ color: 'background', type: 'main'})};
   height: 100vh;
   padding: 64px 319px 0px 319px;
   justify-content: space-between;
 `
 export const StyledFooter = styled.footer`
-  background-color: ${({ theme }) => theme.palette['background'].paper};
+  background-color: ${({ theme }) => theme.palette.find({ color: 'background', type: 'dark'})};
   padding: 48px 0px;
   box-sizing: inherit;
 `
