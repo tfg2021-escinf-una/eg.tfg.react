@@ -30,7 +30,7 @@ export const withBaseWrapper =
           <Typography as="h5"
                       size="xl"
                       weight="bolder">
-            UNA - Trabajo Final de Graduacion
+            UNA - Trabajo Final de Graduación
           </Typography>
           <Typography as="h5"
                       size="md"

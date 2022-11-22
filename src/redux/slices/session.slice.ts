@@ -39,8 +39,8 @@ export const login = createAsyncThunk('session/login',
       return {
         ...sessionReducer,
         isAuthenticated: false,
-        isNotFound: err.originalStatus === 404,
-        isInvalidPassword: err.originalStatus === 400,
+        isNotFound: err.status === 404,
+        isInvalidPassword: err.status === 400,
         isRequestingLogin: false
       }
     } finally {
@@ -99,6 +99,31 @@ export const checkAuthentication = createAsyncThunk('session/checkAuthentication
   } 
 )
 
+export const handleSubmit = createAsyncThunk('session/handleSubmit', 
+  async ({ emailAddress, password }: any, { getState, dispatch }) => { 
+    const { sessionReducer } = getState() as RootState
+    try {
+      if(emailAddress.length > 0 && password.length > 0){
+        return {
+          ...sessionReducer,
+          ...await dispatch(login({
+            emailAddress: emailAddress,
+            password : password
+          })).unwrap()
+        }    
+      }
+    } catch (err: any){
+      return {
+        ...sessionReducer,
+        isAuthenticated: false,
+        isNotFound: err.status === 404,
+        isInvalidPassword: err.status === 400,
+        isRequestingLogin: false
+      }
+    }
+  }    
+)
+
 const sessionSlice = (state: ISessionState = initialState) => (
   createSlice({
     name: 'session',
@@ -121,6 +146,9 @@ const sessionSlice = (state: ISessionState = initialState) => (
         ...state, ...action.payload
       }))
       builder.addCase(refresh.fulfilled, (state, action) => ({
+        ...state, ...action.payload
+      }))
+      builder.addCase(handleSubmit.fulfilled, (state, action) => ({
         ...state, ...action.payload
       }))
     }
