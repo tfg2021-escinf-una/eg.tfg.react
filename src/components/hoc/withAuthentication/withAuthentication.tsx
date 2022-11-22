@@ -15,7 +15,6 @@ export const withAuthentication =
     const dispatch : AppDispatch = useDispatch();
     
     useEffect(() => {
-      console.log('executed')
       dispatch(checkAuthentication())
     }, [dispatch])
 
