@@ -1,20 +1,25 @@
 import { createApi, fetchBaseQuery, retry } from '@reduxjs/toolkit/query/react'
+import { config } from '../config'
 import { RootState } from '../redux'
+
+// Getting our baseUrl gateway link.
+const { APIBaseUrl } = config
 
 // Create our baseQuery instance
 const baseQuery = fetchBaseQuery({
-  baseUrl: '/',
+  baseUrl: APIBaseUrl,
   prepareHeaders: (headers, { getState }) => {
     // By default, if we have a token in the store, let's use that for authenticated requests
-    const token = (getState() as RootState).sessionReducer
-    if (token) {
-      headers.set('authentication', `Bearer ${token}`)
+    const { sessionReducer: { identity } } = (getState() as RootState)
+    if (identity && identity.tokens) {
+      headers.set('Authentication', `Bearer ${identity.tokens}`)
     }
+    headers.set('Content-Type', 'application/json')
     return headers
   },
 })
 
-const baseQueryWithRetry = retry(baseQuery, { maxRetries: 6 })
+const baseQueryWithRetry = retry(baseQuery, { maxRetries: 1 })
 
 /**
  * Create a base API to inject endpoints into elsewhere.
@@ -30,7 +35,7 @@ export const api = createApi({
    * Otherwise, a single API definition should be used in order to support tag invalidation,
    * among other features
    */
-  reducerPath: 'splitApi',
+  reducerPath: 'api',
   /**
    * A bare bones base query would just be `baseQuery: fetchBaseQuery({ baseUrl: '/' })`
    */
