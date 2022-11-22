@@ -1,3 +1,5 @@
 export * from './IColorPalette'
-export * from './ITypographyRules'
+export * from './ITfgSpacing'
 export * from './ITfgTheme'
+export * from './ITypographyRules'
+
