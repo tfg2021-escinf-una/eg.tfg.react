@@ -5,17 +5,24 @@ export const StyledHeader = styled.header`
   z-index: 10;
   top: 0;
 `
+export const StyledContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+`
+
 export const StyledContent = styled.div`
   display: flex;
   background-color: ${({ theme }) => theme.palette.find({ color: 'background', type: 'main'})};
   height: 100vh;
   padding: 64px 319px 0px 319px;
-  justify-content: space-between;
 `
-export const StyledFooter = styled.footer`
-  background-color: ${({ theme }) => theme.palette.find({ color: 'background', type: 'dark'})};
+export const StyledFooter = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-grow: 1;
   padding: 48px 0px;
-  box-sizing: inherit;
+  background-color: ${({ theme }) => theme.palette.find({ color: 'background', type: 'dark'})};
 `
 
 export const StyledFooterContent = styled.div`
@@ -23,8 +30,5 @@ export const StyledFooterContent = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-
-  h5 {
-    margin-bottom: 0.35rem;
-  }
+  row-gap: ${({theme}) => theme.spacing.find(1)};
 `

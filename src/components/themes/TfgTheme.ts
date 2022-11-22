@@ -1,7 +1,7 @@
 import { createGlobalStyle } from "styled-components";
 import { ITfgTheme } from "./interfaces";
-import { createTypographyRules, findPaletteColor } from "./utils";
-import { tfgDarkPalette, tfgTypographyRules } from "./values";
+import { createTypographyRules, findPaletteColor, findSpacingRules } from "./utils";
+import { tfgDarkPalette, tfgSpacing, tfgTypographyRules } from "./values";
 
 export const GlobalStyles = createGlobalStyle`
   body {
@@ -13,5 +13,6 @@ export const GlobalStyles = createGlobalStyle`
 
 export const TfgTheme: ITfgTheme = {
   palette: { ...tfgDarkPalette, find: findPaletteColor(tfgDarkPalette) },
-  typography: { ...tfgTypographyRules, create: createTypographyRules(tfgDarkPalette) }
+  typography: { ...tfgTypographyRules, create: createTypographyRules(tfgDarkPalette) },
+  spacing: { ...tfgSpacing, find: findSpacingRules(tfgSpacing) }
 }

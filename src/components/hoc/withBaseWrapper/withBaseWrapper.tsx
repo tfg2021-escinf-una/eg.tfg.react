@@ -4,7 +4,7 @@ import { AppDispatch, RootState } from "../../../redux";
 import { ISessionState, logout } from "../../../redux/slices/session.slice";
 import { Navbar } from "../../containers";
 import { Typography } from "../../utils";
-import { StyledContent, StyledFooter, StyledFooterContent, StyledHeader } from "./withBaseWrapper.styles";
+import { StyledContainer, StyledContent, StyledFooter, StyledFooterContent, StyledHeader } from "./withBaseWrapper.styles";
 
 export const withBaseWrapper =
   (WrappedComponent: any) =>
@@ -22,28 +22,30 @@ export const withBaseWrapper =
                 handleOnClickLogin={() => navigate('/login')}
                 handleSignOut={() => { dispatch(logout()) }} />
       </StyledHeader>
-      <StyledContent>
-        <WrappedComponent {...props} />
-      </StyledContent>
-      <StyledFooter>
-        <StyledFooterContent>
-          <Typography as="h5"
-                      size="xl"
-                      weight="bolder">
-            UNA - Trabajo Final de Graduación
-          </Typography>
-          <Typography as="h5"
-                      size="md"
-                      weight="normal">
-            Creado por Luis Ramírez y Edwin Lobo
-          </Typography>
-          <Typography as="h5"
-                      size="md"
-                      weight="normal">
-            Copyright © {new Date().getUTCFullYear()}
-          </Typography>
-        </StyledFooterContent>
-      </StyledFooter>
+      <StyledContainer>
+        <StyledContent>
+          <WrappedComponent {...props} />
+        </StyledContent>
+        <StyledFooter>
+          <StyledFooterContent>
+            <Typography as="h5"
+                        size="xl"
+                        weight="bolder">
+              UNA - Trabajo Final de Graduación
+            </Typography>
+            <Typography as="h5"
+                        size="md"
+                        weight="normal">
+              Creado por Luis Ramírez y Edwin Lobo
+            </Typography>
+            <Typography as="h5"
+                        size="md"
+                        weight="normal">
+              Copyright © {new Date().getUTCFullYear()}
+            </Typography>
+          </StyledFooterContent>
+        </StyledFooter>
+      </StyledContainer>    
     </>
   )
 }
