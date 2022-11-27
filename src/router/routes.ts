@@ -1,5 +1,6 @@
 import React from "react"
 import { AuthCovidNews, AuthHome, Login } from "../pages"
+import { Informative } from "../pages/Informative"
 /**
  * Here we are going to define all the routes of the application.
  * Also, if there are pages that need to be decorated with our authentication hoc,
@@ -9,6 +10,11 @@ import { AuthCovidNews, AuthHome, Login } from "../pages"
 export const routeConfig = [
   {
     path: '/',
+    element : React.createElement(Informative),
+    exact: true
+  },
+  {
+    path: '/home',
     element : React.createElement(AuthHome),
     exact: true
   },
