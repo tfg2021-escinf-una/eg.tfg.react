@@ -10,7 +10,6 @@ export const StyledContainer = styled.div`
   flex-direction: column;
   height: 100vh;
 `
-
 export const StyledContent = styled.div`
   display: flex;
   background-color: ${({ theme }) => theme.palette.find({ color: 'background', type: 'main'})};
@@ -24,7 +23,6 @@ export const StyledFooter = styled.div`
   padding: 48px 0px;
   background-color: ${({ theme }) => theme.palette.find({ color: 'background', type: 'dark'})};
 `
-
 export const StyledFooterContent = styled.div`
   display: flex;
   justify-content: center;
