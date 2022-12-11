@@ -22,7 +22,7 @@ export const Card = ({
 }: ICardProps) => {
   const { src, alt } = imgProps 
      || { src: "", alt: "" }
-
+  
   return (
     <StyledCard backgroundColor={backgroundColor}>
       <MuiCard sx={{ maxWidth: maxWidth }}>

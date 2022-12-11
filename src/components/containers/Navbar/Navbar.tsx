@@ -29,7 +29,7 @@ export const Navbar = ({
   };
 
   return(
-    <StyledNavbar>
+    <StyledNavbar className='styledNavbar'>
       <Toolbar>
         <StyledContainer flexGrow>
           <Typography as="h5"

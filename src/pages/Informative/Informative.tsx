@@ -61,35 +61,18 @@ export const Informative = () => {
   ), [])
 
   return (
-    <StyledInformative>
-      <Hero leftNode={<LeftNode/>}
-            rightNode={<RightNode/>}
-            maxHeight={1000}/>
-      <CardGrid firstCard={
-        <Card title="Microservicios"
-              body="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis condimentum at felis quis bibendum.
-                    Pellentesque metus diam, fermentum vitae orci at, cursus feugiat tellus. Proin lobortis imperdiet
-                    dui euismod facilisis. Aliquam bibendum sem vel convallis porttitor. Mauris tincidunt vel est et
-                    euismod. Cras sit amet iaculis sem. Etiam varius eget dui ac congue. Vestibulum ante ipsum primis
-                    in faucibus orci luctus et ultrices posuere cubilia curae; In hac habitasse platea dictumst.">      
-        </Card>
-      } secondCard={
-        <Card title="CI/CD"
-              body="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis condimentum at felis quis bibendum.
-                    Pellentesque metus diam, fermentum vitae orci at, cursus feugiat tellus. Proin lobortis imperdiet
-                    dui euismod facilisis. Aliquam bibendum sem vel convallis porttitor. Mauris tincidunt vel est et
-                    euismod. Cras sit amet iaculis sem. Etiam varius eget dui ac congue. Vestibulum ante ipsum primis
-                    in faucibus orci luctus et ultrices posuere cubilia curae; In hac habitasse platea dictumst.">      
-        </Card>
-      } thirdCard={
-        <Card title="UI"
-              body="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis condimentum at felis quis bibendum.
-                    Pellentesque metus diam, fermentum vitae orci at, cursus feugiat tellus. Proin lobortis imperdiet
-                    dui euismod facilisis. Aliquam bibendum sem vel convallis porttitor. Mauris tincidunt vel est et
-                    euismod. Cras sit amet iaculis sem. Etiam varius eget dui ac congue. Vestibulum ante ipsum primis
-                    in faucibus orci luctus et ultrices posuere cubilia curae; In hac habitasse platea dictumst.">      
-        </Card>
-      }/>
+    <StyledInformative justify="center"
+                       direction="column">
+      <GridItem xs={12}
+                md={12}
+                justify={'center'}>
+        <Hero leftNode={<LeftNode/>}
+              rightNode={<RightNode/>}/>
+      </GridItem>
+      <GridItem xs={12}
+                md={12}>
+        
+      </GridItem>
     </StyledInformative>
   )
 }

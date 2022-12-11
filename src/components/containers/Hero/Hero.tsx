@@ -13,23 +13,21 @@ export const Hero = ({
   className,
   leftNode,
   rightNode,
-  maxHeight = 550 
+  ...rest
 }: IHeroProps) => {
   return (
     <StyledHero className={className}
-                maxHeight={maxHeight}>
-       <Grid  spacing={0}>
-        <GridItem xs={12}
-                  sm={12}
-                  md={5}>
-          {leftNode}
-        </GridItem>
-        <GridItem xs={12}
-                  sm={12}
-                  md={7}>
-          {rightNode}
-        </GridItem>
-      </Grid>
+                spacing={0}>
+      <GridItem xs={12}
+                sm={12}
+                md={5}>
+        {leftNode}
+      </GridItem>
+      <GridItem xs={12}
+                sm={12}
+                md={7}>
+        {rightNode}
+      </GridItem>
     </StyledHero>
   )
 }
