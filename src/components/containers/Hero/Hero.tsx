@@ -1,12 +1,12 @@
 import { ReactNode } from "react"
 import { ITFGComponent } from "../../../interfaces"
-import { Grid, GridItem } from "../GridSystem"
+import { GridItem } from "../GridSystem"
 import { StyledHero } from "./Hero.styles"
 
 export interface IHeroProps extends ITFGComponent {
   leftNode: ReactNode,
   rightNode: ReactNode,
-  maxHeight?: number
+  maxHeight?: number,
 }
 
 export const Hero = ({

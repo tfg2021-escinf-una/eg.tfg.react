@@ -13,5 +13,6 @@ type AlignFlex =
 
 export interface IFlexBoxComponent {
   justify?: JustifyFlex,
-  align?: AlignFlex
+  align?: AlignFlex,
+  alignItems?: AlignFlex,
 }

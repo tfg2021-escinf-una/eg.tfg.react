@@ -11,25 +11,22 @@ export const withBaseWrapper =
   (WrappedComponent: any) =>
   (props: any) => {
 
-  const session : ISessionState = useSelector((state : RootState)  => state.sessionReducer);
+  const { isAuthenticated } = useSelector((state : RootState)  => state.sessionReducer);
   const dispatch : AppDispatch = useDispatch();
   const navigate = useNavigate();
  
   return(
-    <StyledWrapper { ...defaultValues }
-               className="mainContainer"
-               flex
-               direction={'column'} >
-      <Container mobileS={{ height: '64px' }}>    
-        <Navbar isAuthenticated={session.isAuthenticated}
+    <StyledWrapper { ...defaultValues } flex direction={'column'} >
+      <Container>    
+        <Navbar isAuthenticated={isAuthenticated}
                 title={"TFG - Universidad Nacional"}
                 handleOnClickLogin={() => navigate('/login')}
                 handleSignOut={() => { dispatch(logout()) }} />
       </Container>
-      <Container { ...defaultValues } className="wrapContainer">
+      <Container>
         <WrappedComponent { ...props } />
       </Container>
-      <Container >
+      <Container>
         <Grid spacing={0}
               direction={'column'}>
           <GridItem xs={12}

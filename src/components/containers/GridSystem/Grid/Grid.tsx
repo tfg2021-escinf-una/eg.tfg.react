@@ -16,6 +16,7 @@ export const Grid = styled(({
   direction = "row",
   justify = "flex-start",
   align = "center",
+  alignItems = 'center',
   spacing = 0
 }: IGridProps) => {
   return (
@@ -24,6 +25,7 @@ export const Grid = styled(({
              direction={direction}
              justifyContent={justify}
              alignContent={align}
+             alignItems={alignItems}
              spacing={spacing}>
       {children}
     </MuiGrid>

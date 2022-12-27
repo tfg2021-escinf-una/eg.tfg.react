@@ -2,8 +2,9 @@ import styled from "styled-components";
 import { Grid } from "../../components";
 
 export const StyledInformative = styled(Grid)`
-  height: min-content;
-  width: inherit;
+  display: flex;
+  flex-direction: column;
+  row-gap: 15px;  
 `
 export const StyledLeftNode = styled.div`
   display: flex;

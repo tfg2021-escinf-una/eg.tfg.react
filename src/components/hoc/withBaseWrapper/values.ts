@@ -3,25 +3,13 @@ import { CSSObject } from "styled-components";
 import { IDeviceBreakpointsDefsProps } from "../../themes";
 import { TfgTheme } from "../../themes/TfgTheme";
 
-const { 
-  breakpoints: {
-    mobileS, 
-    mobileM,
-    mobileL,
-    laptop,
-    laptopL,
-    tablet,
-    desktop
-  }
-} = TfgTheme
-
 export const commonStyles: CSSObject = {
   display: 'flex',
-  flexDirection: 'row',
-  width: '100%',
-  maxWidth: window.innerWidth,
-  height: 'max-content',
-  maxHeight: 'max-content',
+  flexDirection: 'column',
+  rowGap: '15px',
+  minWidth: '-webkit-fill-available',
+  minHeight: '-webkit-fill-available',
+  backgroundClip: 'content-box',
   backgroundColor: `${TfgTheme.palette.find({
     color: 'background',
     type: 'main'
@@ -31,26 +19,49 @@ export const commonStyles: CSSObject = {
 export const defaultValues : IDeviceBreakpointsDefsProps = {
   mobileS: { 
     ...commonStyles,
+    padding: `${TfgTheme.spacing.find(4)}`,
+    boxShadow: `inset 0 0 0 
+      ${TfgTheme.spacing.find(4)} 
+      ${TfgTheme.palette.find({ color: 'background', type: 'main' })}`,
   },
   mobileM: {
     ...commonStyles,
+    padding: `${TfgTheme.spacing.find(4)}`,
+    boxShadow: `inset 0 0 0 
+      ${TfgTheme.spacing.find(4)} 
+      ${TfgTheme.palette.find({ color: 'background', type: 'main' })}`,
   },
   mobileL: {
     ...commonStyles,
+    padding: `${TfgTheme.spacing.find(3)}`,
+    boxShadow: `inset 0 0 0 
+      ${TfgTheme.spacing.find(3)} 
+      ${TfgTheme.palette.find({ color: 'background', type: 'main' })}`,
   },
   tablet: {
     ...commonStyles, 
+    padding: `${TfgTheme.spacing.find(3)}`,
+    boxShadow: `inset 0 0 0 
+      ${TfgTheme.spacing.find(3)} 
+      ${TfgTheme.palette.find({ color: 'background', type: 'main' })}`,
   },
   laptop: { 
     ...commonStyles,
-    height: '100vh'
+    padding: `${TfgTheme.spacing.find(2)}`,
+    boxShadow: `inset 0 0 0 
+      ${TfgTheme.spacing.find(3)} 
+      ${TfgTheme.palette.find({ color: 'background', type: 'main' })}`,
+    justifyContent: 'space-between',   
   },
   laptopL: { 
     ...commonStyles,
-    height: '100vh'
+    padding: `${TfgTheme.spacing.find(2)}`,
+    boxShadow: `inset 0 0 0 
+      ${TfgTheme.spacing.find(2)} 
+      ${TfgTheme.palette.find({ color: 'background', type: 'main' })}`,
+    justifyContent: 'space-between',  
   },
   desktop: {
-    ...commonStyles,  
-    height: '100vh'
+    ...commonStyles,
   } 
 }

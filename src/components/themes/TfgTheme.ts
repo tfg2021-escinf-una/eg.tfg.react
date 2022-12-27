@@ -4,8 +4,9 @@ import { createBreakpointsRules, createTypographyRules, findPaletteColor, findSp
 import { tfgDarkPalette, tfgDeviceBreakpointsDefinition, tfgSpacing, tfgTypographyRules } from "./values";
 
 export const GlobalStyles = createGlobalStyle`
-  body {
+  html, body {
     margin: 0px;
+    height: 100%;
     overflow-x: hidden;
   }
 `
