@@ -1,26 +1,33 @@
 import { GridDirection } from "@mui/material";
 import { ReactNode } from "react";
-import { StyledGrid } from "./Grid.styles";
 import { Grid as MuiGrid } from '@mui/material'
-export interface IGridProps {
+import styled from "styled-components";
+import { IFlexBoxComponent, ITFGComponent } from "../../../../interfaces";
+
+export interface IGridProps extends ITFGComponent, IFlexBoxComponent {
   children: ReactNode,
   direction?: GridDirection,
-  spacing: number,
+  spacing?: number,
 }
 
-export const Grid = ({
-  spacing,
+export const Grid = styled(({
+  className,
+  children,
   direction = "row",
-  children
+  justify = "flex-start",
+  align = "center",
+  alignItems = 'center',
+  spacing = 0
 }: IGridProps) => {
   return (
-    <StyledGrid direction={direction}
-                spacing={spacing}>
-      <MuiGrid container
-               direction={direction}>
-          {children}
-      </MuiGrid>
-    </StyledGrid>
-    
+    <MuiGrid container
+             className={className}
+             direction={direction}
+             justifyContent={justify}
+             alignContent={align}
+             alignItems={alignItems}
+             spacing={spacing}>
+      {children}
+    </MuiGrid>
   )
-}
+})``

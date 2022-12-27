@@ -1,6 +1,7 @@
 import { Grid } from '@mui/material'
 import { ReactNode } from 'react'
 import styled from 'styled-components'
+import { IFlexBoxComponent, ITFGComponent } from '../../../../interfaces'
 
 export type PixelSize = 
   | 0
@@ -17,7 +18,7 @@ export type PixelSize =
   | 11 
   | 12
 
-export interface IGridItemProps {
+export interface IGridItemProps extends ITFGComponent, IFlexBoxComponent {
   children: ReactNode,
   xs?: PixelSize,
   sm?: PixelSize,
@@ -27,21 +28,29 @@ export interface IGridItemProps {
 }
 
 export const GridItem = styled(({
+  className,
   children,
   xs,
   sm,
   md,
   lg,
-  xl
+  xl,
+  justify = 'flex-start',
+  align = 'flex-start',
 }: IGridItemProps) => {
   return (
-    <Grid item 
+    <Grid item
+          className={className} 
           xs={xs}
           sm={sm}
           md={md}
           lg={lg}
-          xl={xl}>
+          xl={xl}
+          justifyContent={justify}
+          alignContent={align}>
       {children}
     </Grid>
   )
-})``
+})`
+  display: flex;
+`

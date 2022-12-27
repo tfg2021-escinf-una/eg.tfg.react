@@ -2,7 +2,7 @@ import { Button } from '@mui/material'
 import Carousel from 'react-material-ui-carousel'
 import { useNewsQuery, useVaccinesQuery } from '../../api'
 import { withAuthentication } from '../../components'
-import { DataTable } from './components/DataTable'
+import { DataTable } from './composites/DataTable'
 import { StyledCarouselCardContainer, StyledCarouselContainer, StyledContent, StyledImg, StyledImgContainer, StyledMainContainer, StyledVaccinesInfoContainer, StyledVaccinesTitle } from './CovidNews.styles'
 
 const CovidNews = () => {
