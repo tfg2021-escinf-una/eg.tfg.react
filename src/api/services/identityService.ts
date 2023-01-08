@@ -32,7 +32,8 @@ const identityService = api.injectEndpoints({
       query: (user) => ({
         url: `${identityPrefix}/register`,
         method: 'POST',
-        body: user
+        body: user,
+        validateStatus: response => response.status === 201
       })
     }),
     refresh: builder.query<IApiResponse<IToken>, RefreshTokenRequest>({

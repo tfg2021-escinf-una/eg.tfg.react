@@ -2,7 +2,7 @@ import { CardContent } from "@mui/material";
 import styled from "styled-components";
 import { Grid } from "../../components";
 
-export const StyledLogin = styled(Grid)`
+export const StyledRegister = styled(Grid)`
   display: flex;
   flex-direction: column;
   justify-content: center;

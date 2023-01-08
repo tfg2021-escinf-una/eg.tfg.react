@@ -11,3 +11,7 @@ const citiesService = api.injectEndpoints({
     })
   })
 })
+
+export const {
+  useLazyGetCountriesQuery,
+} = citiesService
