@@ -1,28 +1,16 @@
-import { Box, Button, CircularProgress, SnackbarOrigin } from "@mui/material";
-import MuiAlert, { AlertProps } from '@mui/material/Alert';
+import { Box, Button, CircularProgress } from "@mui/material";
 import SnackBar from '@mui/material/Snackbar';
-import { forwardRef, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate } from "react-router-dom";
-import { Typography } from "../../components/utils";
+import { Typography, InputField, GridItem, Card, Alert } from "../../components";
+import { ISnackState } from "../../interfaces";
 import { AppDispatch, RootState } from "../../redux";
-import { handleSubmit, ISessionState } from "../../redux/slices/session.slice";
-import { StyledCard, StyledCardActions, StyledCardContent, StyledDiv, StyledLogo, StyledTextField } from "./Login.styles";
-
-const Alert = forwardRef<HTMLDivElement, AlertProps>(function Alert(
-  props,
-  ref,
-) {
-  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-});
-
-interface ISnackState extends SnackbarOrigin {
-  open?: boolean,
-  message: string
-}
+import { login } from "../../redux/slices/session.slice";
+import { StyledCardContent, StyledLogin } from "./Login.styles";
 
 export const Login = () => {
-  const { isAuthenticated, isRequestingLogin } : ISessionState = useSelector((state : RootState)  => state.sessionReducer);
+  const { isAuthenticated, isRequesting } = useSelector((state : RootState)  => state.sessionReducer);
   const dispatch : AppDispatch = useDispatch();
   const [ emailAddress, setEmailAddress ] = useState<string>("");
   const [ password, setPassword ] = useState<string>("");
@@ -30,6 +18,7 @@ export const Login = () => {
   const [ passwordHasError, setPasswordHasError ] = useState<boolean>(false)
   const [ snackState, setSnackState] = useState<ISnackState>({
     open: false,
+    severity: 'error',
     vertical: 'bottom',
     horizontal: 'center',
     message: '',
@@ -42,20 +31,24 @@ export const Login = () => {
 
   const onSubmit = async () => {
     try{
-      const request = await dispatch(handleSubmit({ emailAddress: emailAddress, password: password })).unwrap()
-      const { 
+      const {
         isAuthenticated: isAuth,
         isNotFound: notFound
-      } = request || { isAuthenticated: false, isNotFound: false}  
+      } = await dispatch(login({ 
+        emailAddress: emailAddress,
+        password: password 
+        })
+      ).unwrap()
+      
       if(!isAuth){
         if(notFound){
-          handleSnack({...snackState, message: 'The entered user is not found'})
+          handleSnack({...snackState, message: 'Usuario no encontrado'})
         } else {
-          handleSnack({...snackState, message: 'The entered password is incorrect'})
+          handleSnack({...snackState, message: 'Contraseña incorrecta' })
         }
       }
     } catch (err) {
-      handleSnack({...snackState, message: 'An unexpected error has occurred, please try again'})
+      handleSnack({...snackState, message: 'Un error ha ocurrido, intente nuevamente' })
     }
   }
 
@@ -68,69 +61,93 @@ export const Login = () => {
       : callback(true)
   }
 
+  const CardActions = useCallback(() => (
+    <Box sx={{ 
+      display: 'flex',
+      justifyContent: 'center',
+      marginBottom: '20px',
+      width: '100%'}}
+        component="div">
+      {
+      isRequesting 
+        ? <CircularProgress /> 
+        : <Button variant="contained"
+                  size="large"
+                  color="primary"
+                  sx={{ width: '100%' }}
+                  onClick={onSubmit}
+                  disabled={emailAddress.length === 0 || password.length === 0 }>
+            <Typography as="h6"
+                        size="md"
+                        weight="bolder">
+              Continuar
+            </Typography>
+          </Button>
+    }
+    </Box>
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  ), [
+    isRequesting,
+    emailAddress,
+    password,
+  ])
+
+  const CardContent = useCallback(({
+    email: [ address, addressError ],
+    password: [ password, passwordError]
+  }: any) => (
+    <StyledCardContent>
+      <Box component="div">
+        <InputField required
+                    error={addressError}
+                    id="outlined-error"
+                    label="Correo electronico"
+                    value={address}
+                    sx={{ width: '100%'}}
+                    onChange={(event) => setEmailAddress(event.target.value)}
+                    onBlur={(event: React.FocusEvent<HTMLInputElement>) => onBlurInput(event, (flag) => setEmailAddressHasError(flag))}/>
+      </Box>
+      <Box component="div">
+      <InputField required 
+                  error={passwordError}
+                  id="outlined-password-input-error"
+                  label="Contraseña"
+                  type="password"
+                  value={password}
+                  autoComplete="current-password"
+                  sx={{ width: '100%'}}
+                  onChange={(event) => setPassword(event.target.value)} 
+                  onBlur={(event: React.FocusEvent<HTMLInputElement>) => onBlurInput(event, (flag) => setPasswordHasError(flag))}/>
+      </Box>
+    </StyledCardContent>
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  ), [
+    setEmailAddress,
+    setEmailAddressHasError,
+    setPassword,
+    setPasswordHasError,
+  ])
+  
   return (
     (!isAuthenticated) ?
-      <StyledDiv>
-        <StyledCard sx={{minWidth: 400}}>
-          <StyledCardContent>
-            <StyledLogo>
-              <img src={"/logo.png"} alt="tfg-logo" />
-            </StyledLogo>
-            <Box component="div"
-                 sx={{ marginBottom: '20px',  width: '100%'}}>
-              <StyledTextField required
-                               error={emailAddressHasError}
-                               id="outlined-error"
-                               label="Email Address"
-                               sx={{ width: '100%'}}
-                               onChange={(event) => setEmailAddress(event.target.value)}
-                               onBlur={(event: React.FocusEvent<HTMLInputElement>) => onBlurInput(event, (flag) => setEmailAddressHasError(flag))}/>
-            </Box>
-            <Box component="div">
-              <StyledTextField required 
-                               error={passwordHasError}
-                               id="outlined-password-input-error"
-                               label="Password"
-                               type="password"
-                               autoComplete="current-password"
-                               sx={{ width: '100%'}}
-                               onChange={(event) => setPassword(event.target.value)} 
-                               onBlur={(event: React.FocusEvent<HTMLInputElement>) => onBlurInput(event, (flag) => setPasswordHasError(flag))}/>
-            </Box>
-          </StyledCardContent>
-          <StyledCardActions>
-            <Box component="div"
-                sx={{ display: 'flex',
-                      justifyContent: 'center',
-                      marginBottom: '20px',
-                      width: '100%'}}>
-              {
-                isRequestingLogin 
-                  ? <CircularProgress /> 
-                  : <Button variant="contained"
-                            size="large"
-                            color="primary"
-                            sx={{ width: '100%' }}
-                            onClick={onSubmit}
-                            disabled={emailAddress.length === 0 || password.length === 0 }>
-                      <Typography as="h6"
-                                  size="md"
-                                  weight="bolder">
-                        Continue
-                      </Typography>
-                    </Button>
-              }
-            </Box>
-          </StyledCardActions>
-        </StyledCard>
-        <SnackBar anchorOrigin={{ vertical, horizontal }}
-                  open={open}
-                  onClose={() => setSnackState({ ...snackState, open: false })}
-                  key={vertical + horizontal}
-                  autoHideDuration={5000}>
-          <Alert severity="error">{message}</Alert>
-        </SnackBar>
-      </StyledDiv> :
+      <StyledLogin justify="center">
+        <GridItem xs={12}
+                  sm={7}
+                  md={4}>
+          <Card imgProps={{ src: "/logo.png", alt: "tfg-logo", height: 200 }}
+                cardActions={<CardActions/>}>
+            <CardContent email={[ emailAddress, emailAddressHasError ]}
+                         password={[ password, passwordHasError ]}/>
+          </Card>
+          <SnackBar anchorOrigin={{ vertical, horizontal }}
+                    open={open}
+                    onClose={() => setSnackState({ ...snackState, open: false })}
+                    key={vertical + horizontal}
+                    autoHideDuration={5000}>
+            <Alert severity={snackState.severity}>{message}</Alert>
+          </SnackBar>
+        </GridItem>
+      </StyledLogin> :
       <Navigate to="/" />
   );
 }

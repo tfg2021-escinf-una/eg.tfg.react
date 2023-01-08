@@ -2,22 +2,28 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "..";
 import { endpoints } from "../../api";
 import { IUserIdentity } from "../../interfaces";
+import { IRegisterFormState } from "../../pages";
 import { checkAuthToken, identityBuilder } from "../utils";
 
 export interface ISessionState {
   isAuthenticated : boolean,
   isNotFound : boolean,
-  isRequestingLogin : boolean,
+  isRequesting : boolean,
   isInvalidPassword : boolean,
   identity?: IUserIdentity,
+  register?: {
+    isSuccedded: boolean,
+    errors: any []
+  }
 }
 
 const initialState : ISessionState = {
   isAuthenticated: false,
   isNotFound: false,
-  isRequestingLogin: false,
+  isRequesting: false,
   isInvalidPassword: false,
-  identity : undefined
+  identity : undefined,
+  register: undefined
 };
 
 export const login = createAsyncThunk('session/login', 
@@ -32,7 +38,7 @@ export const login = createAsyncThunk('session/login',
       return {
         ...sessionReducer,
         isAuthenticated: true,
-        isRequestingLogin: false,
+        isRequesting: false,
         identity : identityBuilder(login!.data)
       }
     } catch (err: any) {
@@ -41,7 +47,7 @@ export const login = createAsyncThunk('session/login',
         isAuthenticated: false,
         isNotFound: err.status === 404,
         isInvalidPassword: err.status === 400,
-        isRequestingLogin: false
+        isRequesting: false
       }
     } finally {
       dispatch(request(false))
@@ -99,38 +105,49 @@ export const checkAuthentication = createAsyncThunk('session/checkAuthentication
   } 
 )
 
-export const handleSubmit = createAsyncThunk('session/handleSubmit', 
-  async ({ emailAddress, password }: any, { getState, dispatch }) => { 
-    const { sessionReducer } = getState() as RootState
-    try {
-      if(emailAddress.length > 0 && password.length > 0){
-        return {
-          ...sessionReducer,
-          ...await dispatch(login({
-            emailAddress: emailAddress,
-            password : password
-          })).unwrap()
-        }    
-      }
-    } catch (err: any){
+export const register = createAsyncThunk('session/register', 
+  async ({ userName, ...rest } : IRegisterFormState, { getState, dispatch }) => {
+    const { sessionReducer } = getState() as RootState 
+    try{
+      dispatch(request(true))
+      const {
+        errors
+      } = await dispatch(endpoints.register.initiate({
+        username: userName,
+        ...rest, 
+      })).unwrap()
+
       return {
         ...sessionReducer,
-        isAuthenticated: false,
-        isNotFound: err.status === 404,
-        isInvalidPassword: err.status === 400,
-        isRequestingLogin: false
+        register: {
+          isSuccedded: errors.length === 0 ? true : false,
+          errors: errors
+        }
       }
+    } catch(err){
+      return {
+        ...sessionReducer,
+        register: {
+          isSuccedded: false,
+          errors: []
+        }
+      }
+    } finally {
+      dispatch(request(false))
     }
-  }    
-)
+  }
+);
 
 const sessionSlice = (state: ISessionState = initialState) => (
   createSlice({
     name: 'session',
     initialState: state,
     reducers: {
+      resetState: (state) => ({ 
+        ...state, ...initialState
+      }),
       request: (state, action: PayloadAction<boolean>) => ({
-        ...state, isRequestingLogin: action.payload
+        ...state, isRequesting: action.payload
       }),
       failure: (state, action: PayloadAction<boolean>) => ({
         ...state, failure: action.payload
@@ -148,7 +165,7 @@ const sessionSlice = (state: ISessionState = initialState) => (
       builder.addCase(refresh.fulfilled, (state, action) => ({
         ...state, ...action.payload
       }))
-      builder.addCase(handleSubmit.fulfilled, (state, action) => ({
+      builder.addCase(register.fulfilled, (state, action) => ({
         ...state, ...action.payload
       }))
     }
@@ -158,6 +175,7 @@ const sessionSlice = (state: ISessionState = initialState) => (
 export const {
   request,
   failure,
-  logout
+  logout,
+  resetState
 } = sessionSlice().actions
 export const sessionReducer = sessionSlice().reducer

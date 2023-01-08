@@ -6,14 +6,12 @@ import { StyledHero } from "./Hero.styles"
 export interface IHeroProps extends ITFGComponent {
   leftNode: ReactNode,
   rightNode: ReactNode,
-  maxHeight?: number,
 }
 
 export const Hero = ({
   className,
   leftNode,
   rightNode,
-  ...rest
 }: IHeroProps) => {
   return (
     <StyledHero className={className}
