@@ -148,6 +148,6 @@ export const Login = () => {
           </SnackBar>
         </GridItem>
       </StyledLogin> :
-      <Navigate to="/" />
+      <Navigate to="/home" />
   );
 }

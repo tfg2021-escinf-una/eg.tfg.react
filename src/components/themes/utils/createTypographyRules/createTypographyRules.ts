@@ -1,5 +1,5 @@
 import { IColorPalette } from "../../interfaces/IColorPalette";
-import { IFontSize, IFontWeight } from "../../interfaces/ITypographyRules";
+import { IFontSize, IFontWeight, TextAlignment } from "../../interfaces/ITypographyRules";
 import { tfgTypographyRules } from "../../values";
 import { findPaletteColor, IColorFinder } from "../findPaletteColor";
 
@@ -7,13 +7,15 @@ interface ICreateTypographyRules {
   weight?: keyof IFontWeight,
   size?: keyof IFontSize,
   color?: IColorFinder
+  textAlign?: TextAlignment 
 }
 
 export const createTypographyRules =
   (palette: IColorPalette) => ({
     weight = 'normal',
     size = 'md',
-    color = { color: 'primary', type: 'contrastText' }
+    color = { color: 'primary', type: 'contrastText' },
+    textAlign = 'start'
   }: ICreateTypographyRules) => {
     
     const { 
@@ -31,5 +33,6 @@ export const createTypographyRules =
       font-size: ${themeSize[size]};
       font-weight: ${themeWeight[weight]};
       color: ${typographyColor};
+      text-align: ${textAlign};
     `;
   }

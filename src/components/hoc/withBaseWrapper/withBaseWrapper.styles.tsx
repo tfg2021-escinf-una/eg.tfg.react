@@ -1,5 +1,7 @@
 import styled from "styled-components"
+import { StyledHome } from "../../../pages/Home/Home.styles"
 import { StyledLogin } from "../../../pages/Login/Login.styles"
+import { StyledProfile } from "../../../pages/Profile/Profile.styles"
 import { StyledRegister } from "../../../pages/Register/Register.styles"
 import { Container, Grid } from "../../containers"
 
@@ -14,6 +16,8 @@ export const StyledWrapper = styled(Container)`
   > ${Container}:nth-child(2){
     padding-top: 64px;
     &:has(${StyledLogin}),
+    &:has(${StyledHome}),
+    &:has(${StyledProfile}),
     &:has(${StyledRegister}) {
       display: flex;
       flex-direction: column;
