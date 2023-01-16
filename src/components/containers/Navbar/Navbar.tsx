@@ -8,7 +8,6 @@ import { StyledContainer, StyledNavbar } from './Navbar.styles';
 export interface INavbarProps {
   isAuthenticated : boolean,
   title : string,
-  handleProfileClick? : () => void,
   handleSignOut? : () => void,
 }
 
@@ -16,7 +15,6 @@ export const Navbar = ({
   isAuthenticated = false,
   title = "",
   handleSignOut,
-  handleProfileClick
 } : INavbarProps) => {
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -67,7 +65,6 @@ export const Navbar = ({
                     keepMounted
                     open={Boolean(anchorEl)}
                     onClose={handleClose}>
-                <MenuItem onClick={handleProfileClick}>Perfil</MenuItem>
                 <MenuItem onClick={handleSignOut}>Cerrar sesion</MenuItem>
               </Menu>
             </>)

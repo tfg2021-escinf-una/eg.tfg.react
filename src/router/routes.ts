@@ -4,7 +4,9 @@ import {
   AuthHome,
   Login,
   Informative,
-  Register
+  Register,
+  AuthCities,
+  AuthProfile
 } from "../pages"
 
 /**
@@ -38,6 +40,16 @@ export const routeConfig = [
     path: '/register',
     element: React.createElement(Register),
     exact: true,
+  },
+  {
+    path: '/cities',
+    element: React.createElement(AuthCities),
+    exact: true,
+  },
+  {
+    path: '/profile',
+    element: React.createElement(AuthProfile),
+    exact: true
   },
   {
     path: "*",

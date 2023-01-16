@@ -18,3 +18,9 @@ export interface ITypographyRules {
   weight: IFontWeight,
   family: string
 }
+
+export type TextAlignment = 
+    'start'
+  | 'center' 
+  | 'end'
+  | 'justify';
