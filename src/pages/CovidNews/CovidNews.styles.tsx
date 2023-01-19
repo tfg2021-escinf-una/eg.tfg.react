@@ -1,40 +1,59 @@
+import Carousel from 'react-material-ui-carousel'
 import styled from 'styled-components'
+import { Grid, GridItem, Typography } from '../../components'
 
-export const StyledMainContainer = styled.div`
-  height: 100%;
+export const StyledCarousel = styled(Carousel)`
   width: 100%;
+  padding: 8px;
+`
+export const StyledMainContainer = styled(Grid)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  justify-content: center !important;
+  row-gap: 25px;
 `
 export const StyledImg = styled.img`
   width: 100%;
+  height: 500px;
+  border-radius: 18px 18px 18px 18px;
+`
+export const StyledCarouselContainer = styled(GridItem)` 
   height: 100%;
-  display: inline;
+  width: 70%;
+  border-radius: 18px 18px 18px 18px;
+  background-color: ${({theme}) => theme.palette.find({
+    color: 'background',
+    type: 'dark'
+  })};
+
+  ${Grid}{
+    height: 90%; 
+    > ${GridItem}{
+      height: inherit;
+      flex-direction: column;
+      row-gap: 10px;
+    };
+    > ${GridItem}:nth-child(2){
+      display: flex;
+      height: inherit;
+      padding: 12px;
+      background-color: ${({theme}) => theme.palette.find({
+        color: 'background',
+        type: 'dark'
+      })};
+      > ${Typography}{
+        padding: 15px;
+      }
+    }
+  }
 `
-export const StyledCarouselCardContainer = styled.div`
+export const StyledVaccinesInfoContainer = styled(GridItem)`
   display: flex;
-  background-color: #71828A;
-  flex-direction: row;
-  width: 100%;
-  height: 85%;
-  margin-top: 5rem;
-  border-radius: 25px;
-  overflow: hidden;
-`
-export const StyledCarouselContainer = styled.div`
-  height: 45%;
-  width: 100%;
-`
-export const StyledImgContainer = styled.div`
-  width: 50%;
-`
-export const StyledContent = styled.div`
-  width: 50%;
-  color: white;
-  margin-left: 1rem;
-`
-export const StyledVaccinesInfoContainer = styled.div`
-  width: 100%;
-  height: 40%;
-`
-export const StyledVaccinesTitle = styled.h1`
-  color: ${({theme}) => theme.palette['primary'].light};
+  flex-direction: column !important;
+  row-gap: 10px;
+  align-items: center;
+  align-content: center;
+  justify-content: center !important;
 `

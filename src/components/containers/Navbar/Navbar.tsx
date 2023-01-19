@@ -3,6 +3,7 @@ import { Button, IconButton, Menu, MenuItem, Toolbar } from "@mui/material";
 import { useCallback, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Typography } from '../../utils';
+import { Icon } from '../Icon';
 import { StyledContainer, StyledNavbar } from './Navbar.styles';
 
 export interface INavbarProps {
@@ -52,11 +53,19 @@ export const Navbar = ({
             <>
               <IconButton size="large"
                           aria-label="account of current user"
+                          aria-controls="menu-home"
+                          aria-haspopup="true"
+                          onClick={() => navigate('/home')}
+                          color="inherit">
+                <Icon iconName='home' size={24}/>
+              </IconButton>
+              <IconButton size="large"
+                          aria-label="account of current user"
                           aria-controls="menu-appbar"
                           aria-haspopup="true"
                           onClick={handleMenu}
                           color="inherit">
-              <AccountCircle />
+                <AccountCircle />
               </IconButton>
               <Menu id="menu-appbar"
                     anchorEl={anchorEl}

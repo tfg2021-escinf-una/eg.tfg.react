@@ -1,49 +1,66 @@
-import { Button } from '@mui/material'
-import Carousel from 'react-material-ui-carousel'
 import { useNewsQuery, useVaccinesQuery } from '../../api'
-import { withAuthentication } from '../../components'
+import { Grid, GridItem, Typography, withAuthentication } from '../../components'
 import { DataTable } from './composites/DataTable'
-import { StyledCarouselCardContainer, StyledCarouselContainer, StyledContent, StyledImg, StyledImgContainer, StyledMainContainer, StyledVaccinesInfoContainer, StyledVaccinesTitle } from './CovidNews.styles'
+import { StyledCarousel, StyledCarouselContainer, StyledImg, StyledMainContainer, StyledVaccinesInfoContainer } from './CovidNews.styles'
 
 const CovidNews = () => {
-  const { data: newsData } = useNewsQuery({})
+  const { data: newsData, isLoading: isLoadingNews } = useNewsQuery({})
   const { data: vaccinesData } = useVaccinesQuery({})
-
   return (
     <StyledMainContainer>
-      <StyledCarouselContainer>
-        {
-          newsData && 
-            <Carousel height={'500px'}>
-              {
+      { newsData && !isLoadingNews && 
+        <StyledCarouselContainer xs={12}
+                                 sm={11}
+                                 md={10}
+                                 lg={8}
+                                 xl={8}>
+          <StyledCarousel>
+            {
               newsData.news.map((news, i) => (       
-                  <StyledCarouselCardContainer key={i}>
-                    <StyledImgContainer>
-                      <StyledImg src={news.urlToImage} 
-                                alt={news.title} />
-                    </StyledImgContainer>
-                    <StyledContent>
-                      <h2>{news.title}</h2>
-                      <p>{news.content.split('[')[0]}</p>
-                      <Button className="CheckButton">
-                        Check it out!
-                      </Button>
-                    </StyledContent>
-                  </StyledCarouselCardContainer>
-                ))
-              }
-            </Carousel>
-        }
-      </StyledCarouselContainer>
-     {
+                <Grid key={i}>
+                  <GridItem xs={12}
+                            sm={12}
+                            md={6}
+                            lg={6}>
+                    <StyledImg src={news.urlToImage} 
+                              alt={news.title} />
+                  </GridItem>
+                  <GridItem xs={12}
+                            sm={12}
+                            md={6}
+                            lg={6}>
+                    <Typography as="h2"
+                                weight='bolder'
+                                size="xl">
+                      {news.title}
+                    </Typography>
+                    <Typography as="h2"
+                                size="md">
+                      {news.content.split('[')[0]}
+                    </Typography>
+                  </GridItem>
+                </Grid>)
+              )
+            }
+          </StyledCarousel>
+        </StyledCarouselContainer>
+      } 
+      {
         vaccinesData && 
-        <StyledVaccinesInfoContainer>
-          <StyledVaccinesTitle>
-            Vaccines Research Info
-          </StyledVaccinesTitle>
-          <DataTable vaccines={vaccinesData} />
-        </StyledVaccinesInfoContainer>
-     } 
+          <StyledVaccinesInfoContainer xs={12}
+                                       sm={11}
+                                       md={9}
+                                       lg={8}
+                                       xl={8}>
+            <Typography as="h2"
+                        size='xl'
+                        weight='bolder'
+                        textAlign="center">
+              Vaccines Research Info
+            </Typography>
+            <DataTable vaccines={vaccinesData} />
+          </StyledVaccinesInfoContainer>
+      } 
     </StyledMainContainer>
   )
 }

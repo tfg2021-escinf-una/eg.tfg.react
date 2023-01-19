@@ -86,7 +86,7 @@ const Cities = () => {
                         size="lg"
                         weight="bolder"
                         textAlign="center">
-              Utiliza los campos de texto para realizar una llamada al GeoCities API              
+              Utilize los campos de texto para realizar una llamada al Geocities API              
             </Typography>
           </GridItem>
           <GridItem sm={12}
