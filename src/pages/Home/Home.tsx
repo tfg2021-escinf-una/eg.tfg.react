@@ -71,7 +71,7 @@ const Home = ({
             justify={"center"}
             alignItems={"center"}>
         <WelcomeLegend/>
-        <CardGrid leftCard={<IconCard iconName="location_city" onClick={() => navigate('/cities')}/>}
+        <CardGrid leftCard={<IconCard iconName="travel_explore" onClick={() => navigate('/cities')}/>}
                   rightCard={<IconCard iconName="coronavirus" onClick={() => navigate('/covid')}/>} />
       </Grid>
       <Grid spacing={2}

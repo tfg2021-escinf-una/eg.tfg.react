@@ -24,7 +24,7 @@ const Profile = () => {
                       size="xl"
                       weight="bolder"
                       textAlign={"center"}>
-            Datos proveeidos por el Identity Management API 
+            Datos proveeídos por el Identity Management API 
           </Typography>
         </GridItem>
         <GridItem xs={12}

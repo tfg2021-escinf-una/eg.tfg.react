@@ -29,10 +29,10 @@ export const createTypographyRules =
     return `
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
-      font-family: ${family};
-      font-size: ${themeSize[size]};
-      font-weight: ${themeWeight[weight]};
-      color: ${typographyColor};
-      text-align: ${textAlign};
+      font-family: ${family} !important;
+      font-size: ${themeSize[size]} !important;
+      font-weight: ${themeWeight[weight]} !important;
+      color: ${typographyColor} !important;
+      text-align: ${textAlign} !important;
     `;
   }
