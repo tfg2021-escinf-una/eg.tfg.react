@@ -24,7 +24,7 @@ export const DataTable = ({ vaccines } : any) =>  {
   return (
     <div style={{ 
       display: 'flex',
-      height: 500,
+      height: '100%',
       width: '100%',
       alignContent: 'center',
       alignItems: 'center',

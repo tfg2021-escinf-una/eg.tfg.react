@@ -49,9 +49,9 @@ const CovidNews = () => {
         vaccinesData && 
           <StyledVaccinesInfoContainer xs={12}
                                        sm={11}
-                                       md={9}
-                                       lg={8}
-                                       xl={8}>
+                                       md={10}
+                                       lg={7}
+                                       xl={7}>
             <Typography as="h2"
                         size='xl'
                         weight='bolder'

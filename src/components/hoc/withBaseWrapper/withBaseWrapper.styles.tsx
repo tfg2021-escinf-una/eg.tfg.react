@@ -1,6 +1,7 @@
 import styled from "styled-components"
 import { StyledHome } from "../../../pages/Home/Home.styles"
 import { StyledLogin } from "../../../pages/Login/Login.styles"
+import { StyledMail } from "../../../pages/Mail/Mail.styles"
 import { StyledProfile } from "../../../pages/Profile/Profile.styles"
 import { StyledRegister } from "../../../pages/Register/Register.styles"
 import { Container, Grid } from "../../containers"
@@ -18,7 +19,8 @@ export const StyledWrapper = styled(Container)`
     &:has(${StyledLogin}),
     &:has(${StyledHome}),
     &:has(${StyledProfile}),
-    &:has(${StyledRegister}) {
+    &:has(${StyledRegister}),
+    &:has(${StyledMail}){
       display: flex;
       flex-direction: column;
       flex-grow: 1;

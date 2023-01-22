@@ -6,7 +6,8 @@ import {
   Informative,
   Register,
   AuthCities,
-  AuthProfile
+  AuthProfile,
+  AuthMail
 } from "../pages"
 
 /**
@@ -50,6 +51,11 @@ export const routeConfig = [
     path: '/profile',
     element: React.createElement(AuthProfile),
     exact: true
+  },
+  {
+    path: '/mail',
+    element: React.createElement(AuthMail),
+    exact: true,
   },
   {
     path: "*",
