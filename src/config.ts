@@ -12,4 +12,5 @@ export const config = {
   gatewayIdpPrefix: window.env.gatewayIdpPrefix,
   gatewayCovidPrefix: window.env.gatewayCovidPrefix,
   gatewayGeocitiesPrefix: window.env.gatewayGeocitiesPrefix,
+  gatewayMailPrefix: window.env.gatewayMailPrefix,
 }

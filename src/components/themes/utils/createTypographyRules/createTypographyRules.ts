@@ -30,7 +30,7 @@ export const createTypographyRules =
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
       font-family: ${family} !important;
-      font-size: ${themeSize[size]} !important;
+      font-size: ${themeSize[size]};
       font-weight: ${themeWeight[weight]} !important;
       color: ${typographyColor} !important;
       text-align: ${textAlign} !important;

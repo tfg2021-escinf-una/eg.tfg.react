@@ -6,5 +6,6 @@ window.env = {
   apiBaseUrl: 'https://eg-gateway-management-dev-tfg2021-escinf-una.cloud.okteto.net',
   gatewayIdpPrefix: '/identity',
   gatewayCovidPrefix: '/covid',
-  gatewayGeocitiesPrefix: '/geocities'
+  gatewayGeocitiesPrefix: '/geocities',
+  gatewayMailPrefix: '/mail',
 }

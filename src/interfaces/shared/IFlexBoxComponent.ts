@@ -13,6 +13,8 @@ type AlignFlex =
 type DirFlex = 
   | 'row'
   | 'column'
+  | 'row-reverse'
+  | 'column-reverse'
 
 export interface IFlexBoxComponent {
   justify?: JustifyFlex,

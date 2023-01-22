@@ -16,7 +16,7 @@ export const StyledMainContainer = styled(Grid)`
 `
 export const StyledImg = styled.img`
   width: 100%;
-  height: 500px;
+  height: 370px;
   border-radius: 18px 18px 18px 18px;
 `
 export const StyledCarouselContainer = styled(GridItem)` 
@@ -52,8 +52,9 @@ export const StyledCarouselContainer = styled(GridItem)`
 export const StyledVaccinesInfoContainer = styled(GridItem)`
   display: flex;
   flex-direction: column !important;
-  row-gap: 10px;
+  row-gap: 30px;
   align-items: center;
   align-content: center;
   justify-content: center !important;
+  height: 450px;
 `
