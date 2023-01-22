@@ -100,19 +100,19 @@ export const Informative = () => {
                 xl={4}
                 justify={'center'}>
         <CardGrid firstCard={
-          <StyledCard onClick={() => window.open("https://www.google.com", "_blank")}>
+          <StyledCard onClick={() => window.open("https://tfg2021-escinf-una.github.io/Microservicios", "_blank")}>
             <StyledTypography size="xl">Microservicios</StyledTypography>
             <Icon size={220} 
                   iconName={"grid_view"} />        
           </StyledCard>
         } secondCard={
-          <StyledCard onClick={() => window.open("https://www.google.com", "_blank")}>
+          <StyledCard onClick={() => window.open("https://tfg2021-escinf-una.github.io/CI_CD", "_blank")}>
             <StyledTypography size="xl" >CI/CD</StyledTypography>
             <Icon size={220}
                   iconName={"rocket_launch"} />  
           </StyledCard>
         } thirdCard={
-          <StyledCard onClick={() => window.open("https://www.google.com", "_blank")}>
+          <StyledCard onClick={() => window.open("https://tfg2021-escinf-una.github.io/UI", "_blank")}>
             <StyledTypography size="xl">Interfaz de Usuario</StyledTypography>
             <Icon size={220}
                   iconName={"desktop_windows"} />  
