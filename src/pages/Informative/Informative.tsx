@@ -1,8 +1,7 @@
-import { Button } from "@mui/material"
 import { ReactNode, useCallback } from "react"
-import { Card, Grid, GridItem, Hero, Typography } from "../../components"
+import { Grid, GridItem, Hero, Icon, Typography } from "../../components"
 import { IFontSize } from "../../components/themes"
-import { StyledInformative, StyledLeftNode, StyledRightNode } from "./Informative.styles"
+import { StyledCard, StyledInformative, StyledLeftNode, StyledRightNode } from "./Informative.styles"
 
 const StyledTypography = ({ 
   children, 
@@ -10,6 +9,7 @@ const StyledTypography = ({
  }: { children: ReactNode, size: keyof IFontSize }) => (
   <Typography as="h5"
               size={size}
+              weight="bolder"
               fontColor={{ color: 'primary', type: 'contrastText' }}>
     {children}
   </Typography>
@@ -49,32 +49,32 @@ export const Informative = () => {
     secondCard,
     thirdCard
   }: any) => (
-    <Grid spacing={5}
+    <Grid spacing={2}
           justify={'center'}
           alignItems={'center'}>
       <GridItem xs={12}
                 sm={6}
-                md={3}
-                lg={3}
-                xl={2}
+                md={4}
+                lg={4}
+                xl={4}
                 justify={'center'}
                 align={'center'}>
         {firstCard}
       </GridItem>
       <GridItem xs={12}
                 sm={6}
-                md={3}
-                lg={3}
-                xl={2}
+                md={4}
+                lg={4}
+                xl={4}
                 justify={'center'}
                 align={'center'}>
         {secondCard}
       </GridItem>
       <GridItem xs={12}
-                sm={12}
-                md={3}
-                lg={3}
-                xl={2}
+                sm={5}
+                md={4}
+                lg={4}
+                xl={4}
                 justify={'center'}
                 align={'center'}>
         {thirdCard}
@@ -87,47 +87,36 @@ export const Informative = () => {
                        direction="column">
       <GridItem xs={12}
                 sm={12}
-                md={12}
-                justify={'center'}>
+                md={6}
+                lg={4}
+                xl={4}>
         <Hero leftNode={<LeftNode/>}
               rightNode={<RightNode/>}/>
       </GridItem>
       <GridItem xs={12}
-                md={12}
+                sm={12}
+                md={6}
+                lg={4}
+                xl={4}
                 justify={'center'}>
         <CardGrid firstCard={
-          <Card cardActions={<Button size="small">Learn More</Button>}>
-            <StyledTypography size="lg">Microservicios</StyledTypography>
-            <StyledTypography size="md">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis condimentum at felis quis bibendum.
-              Pellentesque metus diam, fermentum vitae orci at, cursus feugiat tellus. Proin lobortis imperdiet
-              dui euismod facilisis. Aliquam bibendum sem vel convallis porttitor. Mauris tincidunt vel est et
-              euismod. Cras sit amet iaculis sem. Etiam varius eget dui ac congue. Vestibulum ante ipsum primis
-              in faucibus orci luctus et ultrices posuere cubilia curae; In hac habitasse platea dictumst.
-            </StyledTypography>   
-          </Card>
+          <StyledCard onClick={() => window.open("https://www.google.com", "_blank")}>
+            <StyledTypography size="xl">Microservicios</StyledTypography>
+            <Icon size={220} 
+                  iconName={"grid_view"} />        
+          </StyledCard>
         } secondCard={
-          <Card cardActions={<Button size="small">Learn More</Button>}>
-            <StyledTypography size="lg">CI/CD</StyledTypography>
-            <StyledTypography size="md">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis condimentum at felis quis bibendum.
-              Pellentesque metus diam, fermentum vitae orci at, cursus feugiat tellus. Proin lobortis imperdiet
-              dui euismod facilisis. Aliquam bibendum sem vel convallis porttitor. Mauris tincidunt vel est et
-              euismod. Cras sit amet iaculis sem. Etiam varius eget dui ac congue. Vestibulum ante ipsum primis
-              in faucibus orci luctus et ultrices posuere cubilia curae; In hac habitasse platea dictumst.
-            </StyledTypography>   
-          </Card>
+          <StyledCard onClick={() => window.open("https://www.google.com", "_blank")}>
+            <StyledTypography size="xl" >CI/CD</StyledTypography>
+            <Icon size={220}
+                  iconName={"rocket_launch"} />  
+          </StyledCard>
         } thirdCard={
-          <Card cardActions={<Button size="small">Learn More</Button>}>
-            <StyledTypography size="lg">UI</StyledTypography>
-            <StyledTypography size="md">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis condimentum at felis quis bibendum.
-              Pellentesque metus diam, fermentum vitae orci at, cursus feugiat tellus. Proin lobortis imperdiet
-              dui euismod facilisis. Aliquam bibendum sem vel convallis porttitor. Mauris tincidunt vel est et
-              euismod. Cras sit amet iaculis sem. Etiam varius eget dui ac congue. Vestibulum ante ipsum primis
-              in faucibus orci luctus et ultrices posuere cubilia curae; In hac habitasse platea dictumst.
-            </StyledTypography>   
-          </Card>
+          <StyledCard onClick={() => window.open("https://www.google.com", "_blank")}>
+            <StyledTypography size="xl">Interfaz de Usuario</StyledTypography>
+            <Icon size={220}
+                  iconName={"desktop_windows"} />  
+          </StyledCard>
         }/>
       </GridItem>
     </StyledInformative>
