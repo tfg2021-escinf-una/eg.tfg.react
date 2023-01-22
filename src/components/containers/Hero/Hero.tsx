@@ -18,12 +18,16 @@ export const Hero = ({
                 spacing={0}>
       <GridItem xs={12}
                 sm={12}
-                md={5}>
+                md={6}
+                lg={5}
+                xl={4}>
         {leftNode}
       </GridItem>
       <GridItem xs={12}
                 sm={12}
-                md={7}>
+                md={6}
+                lg={5}
+                xl={4}>
         {rightNode}
       </GridItem>
     </StyledHero>

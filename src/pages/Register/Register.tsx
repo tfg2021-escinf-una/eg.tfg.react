@@ -134,6 +134,7 @@ export const Register = () => {
           </Button>
     }
     </Box>
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   ), [
     isRequesting,
     emailAddress,
