@@ -112,7 +112,7 @@ export const Informative = () => {
                   iconName={"rocket_launch"} />  
           </StyledCard>
         } thirdCard={
-          <StyledCard onClick={() => window.open("https://tfg2021-escinf-una.github.io/UI", "_blank")}>
+          <StyledCard onClick={() => window.open("https://tfg2021-escinf-una.github.io/Tutorial/Microservicios/ReactUI/", "_blank")}>
             <StyledTypography size="xl">Interfaz de Usuario</StyledTypography>
             <Icon size={220}
                   iconName={"desktop_windows"} />  
