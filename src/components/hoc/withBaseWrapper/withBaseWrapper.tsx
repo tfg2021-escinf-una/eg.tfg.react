@@ -17,7 +17,7 @@ export const withBaseWrapper =
                    direction={'column'} >
       <Container>    
         <Navbar isAuthenticated={isAuthenticated}
-                title={"TFG - Universidad Nacional"}
+                title={`TFG - Universidad Nacional ${new Date().getUTCFullYear()}`}
                 handleSignOut={() => { dispatch(logout()) }} />
       </Container>
       <Container>
