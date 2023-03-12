@@ -36,7 +36,7 @@ const CovidNews = () => {
                     </Typography>
                     <Typography as="h2"
                                 size="md">
-                      {news.content.split('[')[0]}
+                      {news.content?.split('[')[0] ?? ""}
                     </Typography>
                   </GridItem>
                 </Grid>)
